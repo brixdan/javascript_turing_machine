@@ -73,8 +73,12 @@ class Machine {
     }
 
     stepLookup() {
-        if (this.ruleset[this.head.state] && this.ruleset[this.head.state][this.tape.tape[this.head.location]]) {
-            return this.ruleset[this.head.state][this.tape.tape[this.head.location]]
+        let __t = this.tape.tape[this.head.location]
+        let __tt = this.ruleset[this.head.state]
+        let t = __tt?__tt[__t]:null
+        if (__tt &&
+            t) {
+            return t
         } else {
             return false
         }
