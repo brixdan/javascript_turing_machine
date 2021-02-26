@@ -8,7 +8,8 @@
 let q = 0; // q = -1 means halt machine
 let p = 4; //head space position - any number as index on tape array:
 // p === undefined --> halt machine, initial/default position = 0
-({R, L, B, q0, q1, q2, q3, q4, q5, halt} = {
+// Escape quotes --> use self referencing variables
+({R, L, B, q0, q1, q2, q3, q4, q5, q10,q11, halt} = {
     R: "R",
     L: "L",
     B: "B",
@@ -18,6 +19,8 @@ let p = 4; //head space position - any number as index on tape array:
     q3: "q3",
     q4: "q4",
     q5: "q5",
+    q10:"q10",
+    q11:"q11",
     halt: "halt"
 });
 // action is 2-dim array of write indexes[0.1] and move number
@@ -76,11 +79,12 @@ function print() {
     console.log(...tape, "||state:" + state[0] + "|position:" + state[1])
 }
 // ------------------- TEST ----------------------
-let tape = [1,1,1]
-state = [q0, 1]
-const program = require("./TMs/increment");
+let tape = [1,0,0,0,1,B,0,1,1,1,1,1,1,1]
+state = [q0, 0]
+//const program = require("./TMs/increment");
 //const program = require("./TMs/double");
 //const program = require("./TMs/decrement");
+const program = require("./TMs/sum");
 tm(program, tape, state)
-//console.log(tape.indexOf(true))
+console.log(tape.indexOf(true))
 

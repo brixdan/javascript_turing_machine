@@ -9,7 +9,7 @@ const program = {
     q1: {
         0: {w:0,m:R,n:q1},
         1: {w:0,m:R,n:q1},
-        B: {w:true,m:0,n:halt}
+        B: {w:true,m:0,n:halt}  // w:true is a signal to stop composer tm
     },
 }
 module.exports = program;
