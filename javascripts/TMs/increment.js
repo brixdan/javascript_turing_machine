@@ -1,4 +1,4 @@
-// increment by 1 left to right number
+// increment by 1 left to right number, in fact simply change of bits
 
 const program = {
     q0: {

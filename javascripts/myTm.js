@@ -24,8 +24,7 @@ let p = 4; //head space position - any number as index on tape array:
 let a = [w, m, n] = [0, 1, 2] // action: write w at current, move to p += m position on tape
 // and to q = n index on internal states array
 
-//const program = require("./TMs/increment");
-const program = require("./TMs/double");
+
 
 
 let state// external state: 0 -> position in q-array, 1 - in tape-array
@@ -53,7 +52,7 @@ function step(program, tape, state) {
             state[1] = state[1] + 1;
             break;
         default:
-            state[1] = a.m;
+            state[1] = a.m; // or jump -)
     }
     return "OK"
 }
@@ -76,9 +75,12 @@ function tm(program, tape, state) {
 function print() {
     console.log(...tape, "||state:" + state[0] + "|position:" + state[1])
 }
-
-let tape = [1,1,1,1,1,1,1,1,1]
-state = [q0, 0]
-
+// ------------------- TEST ----------------------
+let tape = [1,1,1]
+state = [q0, 1]
+const program = require("./TMs/increment");
+//const program = require("./TMs/double");
+//const program = require("./TMs/decrement");
 tm(program, tape, state)
+//console.log(tape.indexOf(true))
 
