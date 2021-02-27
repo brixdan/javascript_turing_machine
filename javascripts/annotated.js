@@ -8,13 +8,14 @@ var tm = function(
 ) {
 
     while(
-        d < c // while ! eof program
+        // d < c // while ! eof program
+        d in a // while ! eof program
         ) {
         /* 'e |= 0' - if e is undefined - reset to 0 else leave as is */
         with (/* q = */a[d][b[e |= 0] || "B"]) { // push current program statement aka "q" to the top of current scope
-            b[e] = w, // chenge symbol under caret, w is the item of "q"
-                e += m, // move caret by ..., m is the item of "q"
-                d = n; // jump to next state, n is the item of "q"
+            b[e] = w // chenge symbol under caret, w is the item of "q"
+                e += m // move caret by ..., m is the item of "q"
+                d = n // jump to next state, n is the item of "q"
         }
     }
 
@@ -33,6 +34,9 @@ var program = {"q0": {"1": {"w": "B", "m": 1, "n": "q1"}},
     "q4": {"1": {"w": "B", "m": 1, "n": "q1"},
         "0": {"w": "0", "m": 1, "n": "q5"}}};
 
-var tape = [1,1,1,1];
+var tape = [1,0,0,1];
 
-document.getElementById("ret").innerHTML = tm(program, tape, "q5", "q0", 0);
+let t = tm(program, tape, "q5", "q0", 0);
+console.log("out:",...t);
+// Buggy program, works with ones only, stuck on zeros like 1,0,0,1->1,0,1,1
+

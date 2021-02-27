@@ -79,12 +79,12 @@ function print() {
     console.log(...tape, "||state:" + state[0] + "|position:" + state[1])
 }
 // ------------------- TEST ----------------------
-let tape = [1,0,0,0,1,B,0,1,1,1,1,1,1,1]
+let tape = [1,B,1]
 state = [q0, 0]
-//const program = require("./TMs/increment");
-//const program = require("./TMs/double");
-//const program = require("./TMs/decrement");
-const program = require("./TMs/sum");
+//program = require("./TMs/increment");
+//program = require("./TMs/double");
+//program = require("./TMs/decrement");
+program = require("./TMs/sum");
 tm(program, tape, state)
 console.log(tape.indexOf(true))
 
