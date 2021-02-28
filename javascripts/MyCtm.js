@@ -8,8 +8,12 @@ var tm = function (
     q = q0, // dimension state
     p = 0 // position state
 ) {
+    if (typeof script === "string") script = require("./TMs/" + script);
+    let step = 0;
     while (q in script) {
-         with (script[q][tape[p] || "B"]) {
+        console.log(`step ${step}:`, ...tape);
+         if (tape[p] === undefined) tape[p] = "B"
+         with (script[q][tape[p]]) {
             tape[p] = w
             q = n
             switch (m) {        // move to next p-position
@@ -23,18 +27,17 @@ var tm = function (
                     p = m; // or jump -)
             }
         }
+        step++
     }
-
     return tape;
-
 }
 var program;
-//program = require("./TMs/increment");
-program = require("./TMs/sum");
+// program = require("./TMs/increment");
+// program = require("./TMs/sum");
 // program = require("./TMs/double");// only for ones
 // program = require("./TMs/decrement");
-var tape = [1, 1, 1, B, 1];
+var tape = [1, 1, 1, 0, 1];
 // for(let i = 0; i<100;i++){
-let t = tm(program, tape);
+let t = tm("increment", tape);
 console.log("out:", ...t);
 // }
