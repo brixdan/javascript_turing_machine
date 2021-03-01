@@ -10,9 +10,15 @@ var tm = function (
 ) {
     if (typeof script === "string") script = require("./TMs/" + script);
     let step = 0;
-    while (q in script) {
+    while (q in script || typeof q === "function") {
         console.log(`step ${step}:`, ...tape);
-         if (tape[p] === undefined) tape[p] = "B"
+         if (tape[p] === undefined) tape[p] = "B";
+         if (typeof q === "function")
+         {
+             tape = q(tape,q0,p)(tm);
+             q = q0;
+             p = 0; // resume initial process
+         }
          with (script[q][tape[p]]) {
             tape[p] = w
             q = n
@@ -36,8 +42,8 @@ var program;
 // program = require("./TMs/sum");
 // program = require("./TMs/double");// only for ones
 // program = require("./TMs/decrement");
-var tape = [1, 1, 1, 0, 1];
+var tape = [1, 1, 1, B, 1];
 // for(let i = 0; i<100;i++){
-let t = tm("increment", tape);
+let t = tm("sum_combo", tape);
 console.log("out:", ...t);
 // }
